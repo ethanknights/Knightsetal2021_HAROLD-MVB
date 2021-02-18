@@ -1,0 +1,99 @@
+% %Stats for LSA & LSS
+load('CCIDList.mat','CCIDList','age')
+
+method = 'LSS'
+%method = 'LSA'
+
+%ROIs
+f = readtable('statsNames.csv','Delimiter',',');
+roifN = table2cell(f(:,1));
+roiName = table2cell(f(:,2));
+
+%Include if plotting ony certain ROIs:
+roifN = roifN(1:6);         %L PCg
+roiName = roiName(1:6);
+
+roifN = roifN(7:12);        %R PCG
+roiName = roiName(7:12);    
+
+roifN = roifN(13:18);       %L Mc
+roiName = roiName(13:18); 
+
+roifN = roifN(19:24);       %R Mc
+roiName = roiName(19:24);
+
+% if strcmp(method,'LSS')
+% %MVPA LSS
+% fN =   {'L-Mc-100vox','decAcc_classify-4Way_ROI-Mc_L_100vox_method-LSS.mat'; ...
+%         'R-Mc-100vox','decAcc_classify-4Way_ROI-Mc_R_100vox_method-LSS.mat'; ...
+%         'L-Mc-500vox','decAcc_classify-4Way_ROI-Mc_L_500vox_method-LSS.mat'; ...
+%         'R-Mc-500vox','decAcc_classify-4Way_ROI-Mc_R_500vox_method-LSS.mat'; ...
+%         'L-Vent-5mm','decAcc_classify-4Way_ROI-Vent_L_5mm_method-LSS.mat'; ...
+%         'R-Vent-5mm','decAcc_classify-4Way_ROI-Vent_R_5mm_method-LSS.mat'; ...
+%         'L-PreCG-5mm','decAcc_classify-4Way_ROI-PreCG_L_5mm_method-LSS.mat'; ...
+%         'R-PreCG-5mm','decAcc_classify-4Way_ROI-PreCG_R_5mm_method-LSS.mat'; ...
+%         'L-PreCG-HOA','decAcc_classify-4Way_ROI-PreCG_L_HOA_method-LSS.mat'; ...
+%         'R-PreCG-HOA','decAcc_classify-4Way_ROI-PreCG_R_HOA_method-LSS.mat'; ...
+%         };
+% %MVPA LSA
+% elseif strcmp(method,'LSA')
+% fN =   {'L-Mc-100vox','decAcc_classify-4Way_ROI-Mc_L_100vox_method-LSA.mat'; ...
+%         'R-Mc-100vox','decAcc_classify-4Way_ROI-Mc_R_100vox_method-LSA.mat'; ...
+%         'L-Mc-500vox','decAcc_classify-4Way_ROI-Mc_L_500vox_method-LSA.mat'; ...
+%         'R-Mc-500vox','decAcc_classify-4Way_ROI-Mc_R_500vox_method-LSA.mat'; ...
+%         'L-Vent-5mm','decAcc_classify-4Way_ROI-Vent_L_5mm_method-LSA.mat'; ...
+%         'R-Vent-5mm','decAcc_classify-4Way_ROI-Vent_R_5mm_method-LSA.mat'; ...
+%         'L-PreCG-5mm','decAcc_classify-4Way_ROI-PreCG_L_5mm_method-LSA.mat'; ...
+%         'R-PreCG-5mm','decAcc_classify-4Way_ROI-PreCG_R_5mm_method-LSA.mat'; ...
+%         'L-PreCG-HOA','decAcc_classify-4Way_ROI-PreCG_L_HOA_method-LSA.mat'; ...
+%         'R-PreCG-HOA','decAcc_classify-4Way_ROI-PreCG_R_HOA_method-LSA.mat'; ...
+%         };
+% fN_CM ={'L-Mc-100vox','CM_classify-4Way_ROI-Mc_L_100vox_method-LSA.mat'; ...
+%         'R-Mc-100vox','CM_classify-4Way_ROI-Mc_R_100vox_method-LSA.mat'; ...
+%         'L-Mc-500vox','CM_classify-4Way_ROI-Mc_L_500vox_method-LSA.mat'; ...
+%         'R-Mc-500vox','CM_classify-4Way_ROI-Mc_R_500vox_method-LSA.mat'; ...
+%         'L-Vent-5mm','CM_classify-4Way_ROI-Vent_L_5mm_method-LSA.mat'; ...
+%         'R-Vent-5mm','CM_classify-4Way_ROI-Vent_R_5mm_method-LSA.mat'; ...
+%         'L-PreCG-5mm','CM_classify-4Way_ROI-PreCG_L_5mm_method-LSA.mat'; ...
+%         'R-PreCG-5mm','CM_classify-4Way_ROI-PreCG_R_5mm_method-LSA.mat'; ...
+%         'L-PreCG-HOA','CM_classify-4Way_ROI-PreCG_L_HOA_method-LSA.mat'; ...
+%         'R-PreCG-HOA','CM_classify-4Way_ROI-PreCG_R_HOA_method-LSA.mat'; ...
+%         };
+% else
+% end
+% roifN =   {'decAcc_classify-4Way_ROI-PreCG_L_40_method-LSS.mat';
+%             'decAcc_classify-4Way_ROI-PreCG_R_40_method-LSS.mat'};
+% roiName =   {'L-PreCG-40';
+%              'R-PreCG-40'};
+
+yAxisSpec = [0.3, 0.7];
+
+%decAcc vs chance
+for i = 1:size(roifN,1)
+    load(cell2mat(roifN(i)),'decAccBal');
+    data(:,i) = decAccBal;
+end
+[m,h,p] = stats_4Way(data,roiName(:),yAxisSpec)
+
+%decAcc corr with age
+for i = 1:size(roifN,1)
+    load(cell2mat(roifN(i)),'decAccBal');
+    data(:,i) = decAccBal;
+end
+[r,p] = ageCorr(age,data,roiName(:)) 
+
+%compare decAcc across voxel size within ROI
+[p_voxSize, ANOVATab, stats] = anova1(data,[],'off');
+    pairwiseCaseList = [1,2; 1,3; 1,4; 1,5; 1,6; 2,3; 2,4; 2,5; 2,6; 3,4; 3,5; 3,6; 4,5; 4,6; 5,6]; 
+    [pairwise_h,pairwise_p] = univPairwise(data,pairwiseCaseList);
+    [pairwiseCaseList pairwise_h' pairwise_p']
+
+
+
+
+
+
+
+
+
+
