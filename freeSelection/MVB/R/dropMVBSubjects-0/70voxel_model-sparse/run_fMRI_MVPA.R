@@ -83,6 +83,10 @@ f.robftest(rlm_model, var=c("age0z21","age0z22")) #age effect?
 # f.robftest(rlm_model, var="age0z22") #quadratic
 f.robftest(rlm_model)
 
+#--- BayesFactor package ---#
+bf10 <-           lmBF(MVPA_L_4way ~ age0z, data = df)
+bf01 = 1/bf10; bf01
+
 rm(p)
 png(file.path(outImageDir,'decAcc_Age_LH.png'), width = 500, height = 500)
 
@@ -119,6 +123,10 @@ f.robftest(rlm_model, var=c("age0z21","age0z22")) #age effect?
 # f.robftest(rlm_model, var="age0z21") #linear
 # f.robftest(rlm_model, var="age0z22") #quadratic
 f.robftest(rlm_model)
+
+#--- BayesFactor package ---#
+bf10 <-           lmBF(MVPA_R_4way ~ age0z, data = df)
+bf01 = 1/bf10; bf01
 
 #Plot
 rm(p)
@@ -160,9 +168,7 @@ f.robftest(rlm_model, var=c("age0z21","age0z22")) #age effect?
 # f.robftest(rlm_model, var="age0z22") #quadratic
 f.robftest(rlm_model)
 
-#--- BF METHOD 2 - BayesFactor package ---#
-summary(rlm_model) #reminder!!
-
+#--- BayesFactor package ---#
 bf10 <-           lmBF(MVPA_boost ~ age0z, data = df)
 bf01 = 1/bf10; bf01
 
