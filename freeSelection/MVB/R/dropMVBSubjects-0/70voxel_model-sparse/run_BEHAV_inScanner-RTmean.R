@@ -49,8 +49,8 @@ f.robftest(rlm_model, var="age0z22")
 #-------------- Get bayes factors --------------#
 summary(rlm_model) #reminder!!
 
-full <-           lmBF(inScanner_RTmean ~ univariateMean_R_0z * age0z2, data = df)
-noInteraction <-  lmBF(inScanner_RTmean ~ univariateMean_R_0z + age0z2, data = df)
+full <-           lmBF(inScanner_RTmean ~ univariateMean_R_0z * age0z, data = df)
+noInteraction <-  lmBF(inScanner_RTmean ~ univariateMean_R_0z + age0z, data = df)
 bf10 = full / noInteraction #less than 1 favours models of
 bf01 = 1/bf10; bf01
 # onlyActivation  <- lmBF(inScanner_RTmean ~ univariateMean_R_0z, data=df); onlyActivation
