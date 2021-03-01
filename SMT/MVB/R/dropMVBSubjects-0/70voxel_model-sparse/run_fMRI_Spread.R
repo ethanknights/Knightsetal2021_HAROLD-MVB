@@ -7,6 +7,10 @@ f.robftest(rlm_model, var=c("age0z21","age0z22")) #age effect?
 f.robftest(rlm_model, var="age0z21") #linear
 f.robftest(rlm_model, var="age0z22") #quadratic
 
+#--- BayesFactor package ---#
+bf10 <-           lmBF(spread_LH ~ age0z, data = df)
+bf01 = 1/bf10; bf01
+
 p <- ggplot(df, aes(x = age, y = spread_LH)) +
   geom_point(shape = 21, size = 3, colour = "indianred2", fill = "lightpink", stroke = 2)
 #p <- p + stat_smooth(method = "rlm", se = TRUE, fill = "grey60", formula = y ~ x, colour = "springgreen3", size = 3)
@@ -37,6 +41,10 @@ summary(rlm_model)
 f.robftest(rlm_model, var=c("age0z21","age0z22")) #age effect? 
 f.robftest(rlm_model, var="age0z21") #linear
 f.robftest(rlm_model, var="age0z22") #quadratic
+
+#--- BayesFactor package ---#
+bf10 <-           lmBF(spread_RH ~ age0z, data = df)
+bf01 = 1/bf10; bf01
 
 p <- ggplot(df, aes(x = age, y = spread_RH)) +
   geom_point(shape = 21, size = 3, colour = "indianred2", fill = "lightpink", stroke = 2)
