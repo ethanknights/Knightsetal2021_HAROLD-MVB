@@ -73,5 +73,4 @@ df$ageTert = with(df,
 # run_fMRI_spread.R
 # run_fMRI_MVB.R
 # run_BEHAV.R
-# run_fMRI_MVPA.R #not this expriment!
 
