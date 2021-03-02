@@ -15,9 +15,9 @@ clear
 flag_dropMVBSubjects = 0;
 
 % %% 001 - RDir/70-voxels_model-sparse
-% RDirSubFolder = '70voxel_model-sparse';
-% ROINames = {'PreCG_L_70','PreCG_R_70','PreCG_L_70&PreCG_R_70'};
-% model = 'sparse'; % 'sparse' | 'smooth'
+RDirSubFolder = '70voxel_model-sparse';
+ROINames = {'PreCG_L_70','PreCG_R_70','PreCG_L_70&PreCG_R_70'};
+model = 'sparse'; % 'sparse' | 'smooth'
 
 %% 002 - RDir/70-voxels_model-sparse_controlVoxelSize-constrictBilateral
 % RDirSubFolder = '70voxel_model-sparse_controlVoxelSize-constrictBilateral';
@@ -25,9 +25,9 @@ flag_dropMVBSubjects = 0;
 % model = 'sparse'; % 'sparse' | 'smooth'
 % 
 %% 003 - RDir/70-voxels_model-sparse_controlVoxelSize-enlargeContralateral
-RDirSubFolder = '70voxel_model-sparse_controlVoxelSize-enlargeContralateral';
-ROINames = {'PreCG_L_140','PreCG_R_70','PreCG_L_70&PreCG_R_70'};
-model = 'sparse'; % 'sparse' | 'smooth'
+% RDirSubFolder = '70voxel_model-sparse_controlVoxelSize-enlargeContralateral';
+% ROINames = {'PreCG_L_140','PreCG_R_70','PreCG_L_70&PreCG_R_70'};
+% model = 'sparse'; % 'sparse' | 'smooth'
 
 % % % %% 004 - JUNK - TEST p VALUE FOR SHUFFLEDMVB WITH SMOOTH PRIOR -  coudlnt decode in anyone
 % % % RDirSubFolder = 'junk';
@@ -157,19 +157,19 @@ ordy = ordy';
 
 %% MVPA
 MVPA_L_4way = [];
-fN = fullfile(univariateDir,'data','MVPA_matlab',sprintf('decAcc_classify-4Way_ROI-%s_method-LSS.mat',ROINames{1}));
+fN = fullfile(univariateDir,'data','MVPA_matlab_leave1RunOut',sprintf('decAcc_classify-4Way_ROI-%s_method-LSS.mat',ROINames{1}));
 load(fN,'decAccBal','confMat');
 MVPA_L_4way = decAccBal';
 confMat_L_4way = confMat;
 
 MVPA_R_4way = [];
-fN = fullfile(univariateDir,'data','MVPA_matlab',sprintf('decAcc_classify-4Way_ROI-%s_method-LSS.mat',ROINames{2}));
+fN = fullfile(univariateDir,'data','MVPA_matlab_leave1RunOut',sprintf('decAcc_classify-4Way_ROI-%s_method-LSS.mat',ROINames{2}));
 load(fN,'decAccBal','confMat');
 MVPA_R_4way = decAccBal';
 confMat_R_4way = confMat;
 
 MVPA_Bi_4way = [];
-fN = fullfile(univariateDir,'data','MVPA_matlab',sprintf('decAcc_classify-4Way_ROI-%s_method-LSS.mat',ROINames{3}));
+fN = fullfile(univariateDir,'data','MVPA_matlab_leave1RunOut',sprintf('decAcc_classify-4Way_ROI-%s_method-LSS.mat',ROINames{3}));
 load(fN,'decAccBal','confMat');
 MVPA_Bi_4way = decAccBal';
 confMat_Bi_4way = confMat;

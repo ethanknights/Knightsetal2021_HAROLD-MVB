@@ -57,10 +57,13 @@ parfor s = 1:length(CCIDList)
   %allDurs = {SPMmat.SPM.Sess.U.dur}; %all are 0..
   for c = 1:nCond
     S.events.ons{c} = allOns{c};
-    S.events.dur{c}(1:length(S.events.ons{c})) = 2; %1TR - CORRECT??
+    S.events.dur{c}(1:length(S.events.ons{c})) = 0; %THIS HAS CHANGED!!
   end
   
   S.method = method;
+  
+  S.XC = SPMmat.SPM.xX.X(:,16:23); %confounds
+  %S.coi = 1:3; %I'll ignore these catch trials when doing R
   
   %% get singletrial betas
   beta{s} = fMRI_multitrial_GLMs(S);
