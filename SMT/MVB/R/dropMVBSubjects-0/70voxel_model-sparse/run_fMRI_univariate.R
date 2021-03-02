@@ -13,7 +13,7 @@ p <- p + stat_smooth(method = "rlm", se = TRUE, fill = "grey60", formula = y ~ x
 #p <- p + stat_smooth(method = "rlm", se = TRUE, fill = "grey60", formula = y ~ poly(x,2, raw = TRUE), colour = "springgreen3", size = 3)
 #formatting
 p <- p + 
-  ylim(-1,2.5) +
+  ylim(-1,2.002) +
   scale_x_continuous(breaks = round(seq(20, max(80), by = 20),1),
                      limits = c(15,90)) +
   theme_bw() + 
@@ -45,7 +45,7 @@ p <- ggplot(df, aes(x = age, y = univariateMean_R)) +
 p <- p + stat_smooth(method = "rlm", se = TRUE, fill = "grey60", formula = y ~ poly(x,2, raw = TRUE), colour = "springgreen3", size = 3)
 #formatting
 p <- p + 
-  ylim(-1,2.5) +
+  ylim(-1,2.002) +
   scale_x_continuous(breaks = round(seq(20, max(80), by = 20),1),
                      limits = c(15,90)) +
   theme_bw() + 
@@ -60,103 +60,3 @@ p <- p +
         text = element_text(size=24))
 ggsave(file.path(outImageDir,'univariateMean_RH.png'),
        width = 25, height = 25, units = 'cm', dpi = 300); p
-
-
-
-
-# ####Make extra graphs omitting the high y outlier to see bestfit lines better for presentations
-# 
-# #LH
-# p <- ggplot(df, aes(x = age, y = univariateMean_L)) +
-#   geom_point(shape = 21, size = 3, colour = "indianred2", fill = "lightpink", stroke = 2)
-# p <- p + stat_smooth(method = "rlm", se = TRUE, fill = "grey60", formula = y ~ x, colour = "springgreen3", size = 3)
-# #p <- p + stat_smooth(method = "rlm", se = TRUE, fill = "grey60", formula = y ~ poly(x,2, raw = TRUE), colour = "springgreen3", size = 3)
-# #formatting
-# p <- p +
-#   ylim(-0.1,0.2) +
-#   scale_x_continuous(breaks = round(seq(20, max(80), by = 20),1),
-#                      limits = c(15,90)) +
-#   theme_bw() +
-#   theme(panel.border = element_blank(),
-#         panel.grid.major = element_blank(),
-#         legend.position = "none",
-#         panel.grid.minor = element_blank(),
-#         axis.line =
-#           element_line(colour = "black",size = 1.5),
-#         axis.ticks = element_line(colour = "black",
-#                                   size = 1.5),
-#         text = element_text(size=24))
-# ggsave(file.path(outImageDir,'univariateMean_LH_1outliernotshown.png'),
-#        width = 25, height = 25, units = 'cm', dpi = 300); p
-# 
-# p <- ggplot(df, aes(x = age, y = univariateMean_L)) +
-#   geom_point(shape = 21, size = 3, colour = "indianred2", fill = "lightpink", stroke = 2)
-# p <- p + stat_smooth(method = "rlm", se = TRUE, fill = "grey60", formula = y ~ x, colour = "springgreen3", size = 3)
-# #p <- p + stat_smooth(method = "rlm", se = TRUE, fill = "grey60", formula = y ~ poly(x,2, raw = TRUE), colour = "springgreen3", size = 3)
-# #formatting
-# p <- p +
-#   ylim(0.2,0.4) +
-#   scale_y_continuous(breaks = round(seq(0.2, max(0.4), by = 0.1),1),
-#                      limits = c(0.2,0.4)) +
-#   scale_x_continuous(breaks = round(seq(20, max(80), by = 20),1),
-#                      limits = c(15,90)) +
-#   theme_bw() +
-#   theme(panel.border = element_blank(),
-#         panel.grid.major = element_blank(),
-#         legend.position = "none",
-#         panel.grid.minor = element_blank(),
-#         axis.line =
-#           element_line(colour = "black",size = 1.5),
-#         axis.ticks = element_line(colour = "black",
-#                                   size = 1.5),
-#         text = element_text(size=24))
-# ggsave(file.path(outImageDir,'univariateMean_LH_1outlier.png'),
-#        width = 25, height = 25, units = 'cm', dpi = 300); p
-# 
-# 
-# # RH
-# p <- ggplot(df, aes(x = age, y = univariateMean_R)) +
-#   geom_point(shape = 21, size = 3, colour = "indianred2", fill = "lightpink", stroke = 2)
-# #p <- p + stat_smooth(method = "rlm", se = TRUE, fill = "grey60", formula = y ~ x, colour = "springgreen3", size = 3)
-# p <- p + stat_smooth(method = "rlm", se = TRUE, fill = "grey60", formula = y ~ poly(x,2, raw = TRUE), colour = "springgreen3", size = 3)
-# #formatting
-# p <- p +
-#   ylim(-0.1,0.2) +
-#   scale_x_continuous(breaks = round(seq(20, max(80), by = 20),1),
-#                      limits = c(15,90)) +
-#   theme_bw() +
-#   theme(panel.border = element_blank(),
-#         panel.grid.major = element_blank(),
-#         legend.position = "none",
-#         panel.grid.minor = element_blank(),
-#         axis.line =
-#           element_line(colour = "black",size = 1.5),
-#         axis.ticks = element_line(colour = "black",
-#                                   size = 1.5),
-#         text = element_text(size=24))
-# ggsave(file.path(outImageDir,'univariateMean_RH_1outliernotshown.png'),
-#        width = 25, height = 25, units = 'cm', dpi = 300); p
-# 
-# p <- ggplot(df, aes(x = age, y = univariateMean_R)) +
-#   geom_point(shape = 21, size = 3, colour = "indianred2", fill = "lightpink", stroke = 2)
-# #p <- p + stat_smooth(method = "rlm", se = TRUE, fill = "grey60", formula = y ~ x, colour = "springgreen3", size = 3)
-# p <- p + stat_smooth(method = "rlm", se = TRUE, fill = "grey60", formula = y ~ poly(x,2, raw = TRUE), colour = "springgreen3", size = 3)
-# #formatting
-# p <- p +
-#   ylim(0.2,0.4) +
-#   scale_y_continuous(breaks = round(seq(0.2, max(0.4), by = 0.1),1),
-#                      limits = c(0.2,0.4)) +
-#   scale_x_continuous(breaks = round(seq(20, max(80), by = 20),1),
-#                      limits = c(15,90)) +
-#   theme_bw() +
-#   theme(panel.border = element_blank(),
-#         panel.grid.major = element_blank(),
-#         legend.position = "none",
-#         panel.grid.minor = element_blank(),
-#         axis.line =
-#           element_line(colour = "black",size = 1.5),
-#         axis.ticks = element_line(colour = "black",
-#                                   size = 1.5),
-#         text = element_text(size=24))
-# ggsave(file.path(outImageDir,'univariateMean_RH_1outlier.png'),
-#        width = 25, height = 25, units = 'cm', dpi = 300); p
