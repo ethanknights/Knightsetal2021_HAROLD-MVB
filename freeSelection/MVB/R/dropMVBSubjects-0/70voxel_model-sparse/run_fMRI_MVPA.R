@@ -39,8 +39,8 @@ t.test(df$MVPA_Bi_4way, alternative = "greater", mu = 0.25)
 se <- function(x) sqrt(var(x)/length(x))*2 #2 SE +/-
 
 df2 <- data.frame(
-  decAccMean = c(mean(df$MVPA_L_4way),mean(df$MVPA_R_4way),mean(df$MVPA_R_4way)),
-  decAccSE = c(se(df$MVPA_L_4way),se(df$MVPA_R_4way),se(df$MVPA_R_4way)),
+  decAccMean = c(mean(df$MVPA_L_4way),mean(df$MVPA_R_4way),mean(df$MVPA_Bi_4way)),
+  decAccSE = c(se(df$MVPA_L_4way),se(df$MVPA_R_4way),se(df$MVPA_Bi_4way)),
   ROI = c('L_80','R_80','Bi_160'),
   ROIorder = factor(c(1,2,3))
 )

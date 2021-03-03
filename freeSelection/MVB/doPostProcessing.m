@@ -15,14 +15,14 @@ clear
 flag_dropMVBSubjects = 0;
 
 % %% 001 - RDir/70-voxels_model-sparse
-RDirSubFolder = '70voxel_model-sparse';
-ROINames = {'PreCG_L_70','PreCG_R_70','PreCG_L_70&PreCG_R_70'};
-model = 'sparse'; % 'sparse' | 'smooth'
+% RDirSubFolder = '70voxel_model-sparse';
+% ROINames = {'PreCG_L_70','PreCG_R_70','PreCG_L_70&PreCG_R_70'};
+% model = 'sparse'; % 'sparse' | 'smooth'
 
 %% 002 - RDir/70-voxels_model-sparse_controlVoxelSize-constrictBilateral
-% RDirSubFolder = '70voxel_model-sparse_controlVoxelSize-constrictBilateral';
-% ROINames = {'PreCG_L_70','PreCG_R_70','PreCG_L_35&PreCG_R_35'};
-% model = 'sparse'; % 'sparse' | 'smooth'
+RDirSubFolder = '70voxel_model-sparse_controlVoxelSize-constrictBilateral';
+ROINames = {'PreCG_L_70','PreCG_R_70','PreCG_L_35&PreCG_R_35'};
+model = 'sparse'; % 'sparse' | 'smooth'
 % 
 %% 003 - RDir/70-voxels_model-sparse_controlVoxelSize-enlargeContralateral
 % RDirSubFolder = '70voxel_model-sparse_controlVoxelSize-enlargeContralateral';

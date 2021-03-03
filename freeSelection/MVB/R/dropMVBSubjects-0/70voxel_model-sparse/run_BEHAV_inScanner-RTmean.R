@@ -80,7 +80,7 @@ p <- p +
         axis.ticks = element_line(colour = "black",
                                   size = 1.5),
         text = element_text(size=24)) +
-  coord_cartesian(xlim = c(-0.1,0.1) , ylim = c(0,1000), expand = TRUE)
+  coord_cartesian(xlim = c(-1,1) , ylim = c(0,1000), expand = TRUE)
 ggsave(file.path(outImageDir,"RTmean~RHBYAge_inScanner.png"),
        width = 25, height = 25, units = 'cm', dpi = 300); p
 
