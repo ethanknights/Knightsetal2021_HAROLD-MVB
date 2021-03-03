@@ -73,5 +73,6 @@ df$ageTert = with(df,
 # run_fMRI_spread.R
 # run_fMRI_MVB.R
 # run_BEHAV.R
-# run_fMRI_MVPA.R
+# run_fMRI_MVPA.R #for decoding accuracy vs. chance, and predicted by age.
+# run_fMRI_MVPA_excludeMVPAFailedDecoding.R #for decoding accuracy boost ~ Age
 
