@@ -91,11 +91,12 @@ cor.test(df$spread_LH,df$spread_RH,method="spearman") #Spearmans rank for non-no
 cor.test(df$spread_LH,df$spread_RH) #default same
 
 #-- RH Spread predicted by Age + LH Spread --#
-rlm_model <- rlm(spread_RH ~ age0z2 + spread_LH, 
+#Using log of spread as stdev always positive
+rlm_model <- rlm(log1p(spread_RH) ~ age0z2 + log1p(spread_LH), 
                  data = df, psi = psi.huber, k = 1.345)
 summary(rlm_model)
 f.robftest(rlm_model)
 f.robftest(rlm_model, var=c("age0z21","age0z22"))
 # f.robftest(rlm_model, var="age0z21") #linear
 # f.robftest(rlm_model, var="age0z22") #quadratic
-f.robftest(rlm_model, var="spread_LH")
+f.robftest(rlm_model, var="log1p(spread_LH)")
