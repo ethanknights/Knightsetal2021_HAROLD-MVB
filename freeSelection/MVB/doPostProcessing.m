@@ -149,7 +149,7 @@ for s = 1:length(CCIDList)
   elseif F_diff(s) < -3
     ordy(s) = 0; % < -3: 0
   else
-    ordy(s) = 1;  % == 3: 1
+    ordy(s) = 1;  % between -3 and 3: 1
   end
 end
 ordy = ordy';
