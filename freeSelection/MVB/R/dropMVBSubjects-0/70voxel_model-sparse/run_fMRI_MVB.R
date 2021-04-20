@@ -63,7 +63,7 @@ ggplot(df_subset, aes(x = ageGroups, fill=fct_rev(ordy))) +
                                   size = 1.5),
         text = element_text(size=24)) +
   scale_fill_manual( values = c("limegreen","lightgray")) + 
-  coord_cartesian(xlim = c(0,8) , ylim = c(0,100), expand = FALSE)
+  coord_cartesian(xlim = c(0,8) , ylim = c(0,10), expand = FALSE)
 ggsave(file.path(outImageDir,'Boost_stackedBar.png'),
        width = 25, height = 25, units = 'cm', dpi = 300)
 
