@@ -24,7 +24,8 @@ wald.test(model, terms = c(2,3)) #age effect?
 source("getBF_MVB_linearANDQuadratic.R")  #get BF01 for Boost ~ Age > 0
 
 
-#Plot - geom_density
+#Plot - geom_density 
+#fancier than: plot(df$age,df$ordy)
 ggplot(df_subset, aes(age, fill = fct_rev(ordy))) + 
   geom_density(position='fill', alpha = 0.75,color="white", kernel = 'cosine') +
   theme_bw() + 
