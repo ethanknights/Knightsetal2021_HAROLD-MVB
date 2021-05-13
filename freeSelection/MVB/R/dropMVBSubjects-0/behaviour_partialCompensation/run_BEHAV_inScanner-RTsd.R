@@ -18,8 +18,15 @@ rlm_model <- rlm(inScanner_RTsd ~ univariateMean_L_0z * univariateMean_R_0z * ag
                  data = df, psi = psi.huber, k = 1.345)
 summary(rlm_model)
 f.robftest(rlm_model)
+# 2-way
 f.robftest(rlm_model, var=c("univariateMean_R_0z:age0z21","univariateMean_R_0z:age0z22"))
 full <-           lmBF(inScanner_RTsd ~ univariateMean_L_0z + univariateMean_R_0z * age0z, data = df)
+noInteraction <-  lmBF(inScanner_RTsd ~ univariateMean_L_0z + univariateMean_R_0z + age0z, data = df)
+bf10 = full / noInteraction #less than 1 favours models of 
+bf01 = 1/bf10; bf01
+# 3-way
+f.robftest(rlm_model, var=c("univariateMean_L_0z:univariateMean_R_0z:age0z21","univariateMean_L_0z:univariateMean_R_0z:age0z22"))
+full <-           lmBF(inScanner_RTsd ~ univariateMean_L_0z * univariateMean_R_0z * age0z, data = df)
 noInteraction <-  lmBF(inScanner_RTsd ~ univariateMean_L_0z + univariateMean_R_0z + age0z, data = df)
 bf10 = full / noInteraction #less than 1 favours models of 
 bf01 = 1/bf10; bf01
