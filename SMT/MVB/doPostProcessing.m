@@ -7,7 +7,7 @@
 %% RDir/70-voxels_model-sparse_controlVoxelSize
 %%
 %% flag_dropMVBSubjects = 1 (exclude subjects who fail MVB decoding from all analyses) | 0 (dont exclude these subjects at all, even in MVB)
-
+%% Final analysis uses flag_dropMVBSubjects = 0 (not dropping subs from bhv just due to MVB)
 clear
 
 %% Ensure 'data.csv' saved to a sensible R/<subFolder> with appropriate data
@@ -34,7 +34,7 @@ model = 'sparse'; % 'sparse' | 'smooth'
 RDir = fullfile('R',sprintf('dropMVBSubjects-%d',flag_dropMVBSubjects),RDirSubFolder,'csv');
 mkdir(RDir)
 
-univariateDir = '/imaging/ek03/projects/HAROLD/SMT/pp'; %for grabbing data ('pp' should be cd ../)
+univariateDir = '/imaging/henson/users/ek03/projects/HAROLD/SMT/pp'; %for grabbing data ('pp' should be cd ../)
 load('CCIDList.mat','CCIDList','age');
 
 %1 - Gather all main data (regardless of exclusion criteria)
@@ -232,11 +232,5 @@ height(d)
 
 
 
-
-%3 Write csv for R analysis
+%% 3. Write csv for R analysis
 writetable(d,fullfile(RDir,'data.csv'));
-
-
-
-
-

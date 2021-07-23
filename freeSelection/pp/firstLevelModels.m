@@ -51,7 +51,7 @@ parfor s = 1:nSubs
     matlabbatch{1}.spm.stats.fmri_spec.sess.multi_reg = cellstr(fN_confounds);
     matlabbatch{1}.spm.stats.fmri_spec.sess.hpf = 128;
     matlabbatch{1}.spm.stats.fmri_spec.fact = struct('name', {}, 'levels', {});
-    matlabbatch{1}.spm.stats.fmri_spec.bases.hrf.derivs = [0 0]; %no derivatives because SOA unsuitable    
+    matlabbatch{1}.spm.stats.fmri_spec.bases.hrf.derivs = [0 0]; %no derivatives because SOA unsuitable
     matlabbatch{1}.spm.stats.fmri_spec.volt = 1; %2 = model interactions in spm_batch
     matlabbatch{1}.spm.stats.fmri_spec.global = 'None';
     matlabbatch{1}.spm.stats.fmri_spec.mthresh = 0.2; %to match aa SMT

@@ -41,7 +41,7 @@ se <- function(x) sqrt(var(x)/length(x))*2 #2 SE +/-
 df2 <- data.frame(
   decAccMean = c(mean(df$MVPA_L_4way),mean(df$MVPA_R_4way),mean(df$MVPA_Bi_4way)),
   decAccSE = c(se(df$MVPA_L_4way),se(df$MVPA_R_4way),se(df$MVPA_Bi_4way)),
-  ROI = c('L_80','R_80','Bi_160'),
+  ROI = c('L_70','R_70','Bi_140'),
   ROIorder = factor(c(1,2,3))
 )
 
@@ -73,7 +73,7 @@ ggsave(file.path(outImageDir,'decAcc_chance.png'), plot = p,
 
 
 
-#---------- decAcc correlate with age? ---------#
+#---------- decAcc predicted by age? ---------#
 #---LH---#
 rlm_model <- rlm(MVPA_L_4way ~ age0z2, 
                 data = df, psi = psi.huber, k = 1.345)
@@ -157,7 +157,7 @@ print(p)
 dev.off()
 
 
-#---------- decAcc Boost correlate with age? --------#
+#---------- decAcc Boost predicted by age? --------#
 df$MVPA_boost = df$MVPA_Bi_4way - df$MVPA_L_4way
 
 rlm_model <- rlm(MVPA_boost ~ age0z2, 

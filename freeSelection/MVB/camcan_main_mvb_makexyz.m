@@ -15,7 +15,7 @@
 clear
 
 %-- Setup paths / variables --%
-mvbDir = '/imaging/ek03/projects/HAROLD/freeSelection/MVB';
+mvbDir = '/imaging/henson/users/ek03/projects/HAROLD/freeSelection/MVB';
 if any(ismember(regexp(path,pathsep,'Split'),mvbDir)); else; addpath(mvbDir); end
 
 load('CCIDList.mat','CCIDList')
@@ -29,9 +29,11 @@ select_con = 1; %all big baseline
 % #features (voxels)
 % allnvox = 70*ones(1,numel(roinames)); %to assert mask has expected nvoxels
 
-roinames = {'PreCG_L_140','PreCG_R_35'};
+roinames = {'SMA_L_70','SMA_R_70'};
+
+%roinames = {'PreCG_L_140','PreCG_R_35'};
 % #features (voxels)
-% allnvox = 35*ones(1,numel(roinames)); %to assert mask has expected nvoxels
+%allnvox = 35*ones(1,numel(roinames)); %to assert mask has expected nvoxels
 
 % nomenclature for output
 %con=[13];  % target contrast (not used here)
@@ -159,7 +161,7 @@ for sub=1:length(CCIDList)
     save( fname, 'selXYZmm','nVox');
     
     %% write nifti to check
-    writeNIFTI2(sprintf('myROI_%s.nii',fname),selXYZmm,'/imaging/ek03/projects/HAROLD/SMT/pp/data/aa_norm_write_dartel_masked/CC110033/mswaufMR10033_CC110033-0006.nii,1');
+    writeNIFTI2(sprintf('myROI_%s.nii',fname),selXYZmm,'/imaging/henson/users/ek03/projects/HAROLD/SMT/pp/data/aa_norm_write_dartel_masked/CC110033/mswaufMR10033_CC110033-0006.nii,1');
     %spm_check_registration(sprintf('myROI_%s.nii',fname),'/imaging/ek03/projects/HAROLD/SMT/pp/data/aa_norm_write_dartel_masked/CC110033/mswaufMR10033_CC110033-0006.nii,1')
 
 
@@ -187,7 +189,7 @@ for sub=1:length(CCIDList)
   save( fname, 'selXYZmm','nVox');
   
   %% write nifti to check
-  writeNIFTI2(sprintf('myROI_%s.nii',fname),selXYZmm,'/imaging/ek03/projects/HAROLD/SMT/pp/data/aa_norm_write_dartel_masked/CC110033/mswaufMR10033_CC110033-0006.nii,1');
+  writeNIFTI2(sprintf('myROI_%s.nii',fname),selXYZmm,'/imaging/henson/users/ek03/projects/HAROLD/SMT/pp/data/aa_norm_write_dartel_masked/CC110033/mswaufMR10033_CC110033-0006.nii,1');
   %spm_check_registration(sprintf('myROI_%s.nii',fname),'/imaging/ek03/projects/HAROLD/SMT/pp/data/aa_norm_write_dartel_masked/CC110033/mswaufMR10033_CC110033-0006.nii,1')
 
   
