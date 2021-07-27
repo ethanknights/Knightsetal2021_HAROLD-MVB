@@ -6,7 +6,7 @@ clear
 load('CCIDList.mat','CCIDList','age','fNs','trialInfo');
 
 destDir_root = 'data';
-kernelSize = 8; %8 | 10 %value refers to the smoothing of the RSFA scale smooth (i.e. all are 10mm, then this value too)
+kernelSize = 0; %8 | 10 %value refers to the smoothing of the RSFA scale smooth (i.e. all are 10mm, then this value too)
 
 sourceDirs = {'firstLevelModel','firstLevelModel_smooth'}; 
 destDirs = {'groupModel',['groupModel_smooth_',num2str(kernelSize),'mm']};

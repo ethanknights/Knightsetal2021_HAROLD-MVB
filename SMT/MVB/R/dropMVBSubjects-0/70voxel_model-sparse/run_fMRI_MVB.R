@@ -13,7 +13,8 @@ summary(model)
 #Get Odds ratio
 exp(coef(model))
 ci<-confint(model)
-OR <- exp(cbind(OR = coef(model), ci)); OR
+OR <- exp(cbind(OR = coef(model), ci)); OR 
+#effect size cohen d? d = b / (sqrt(n)*SE) = b / SE * 1 / sqrt(n)  = z/sqrt(n)
 source("getBF_MVB_linear.R") #get BF01 for Boost ~ Age > 0 
 
 #-- For completion add quadratic term  --#

@@ -7,6 +7,17 @@ f.robftest(rlm_model, var=c("age0z21","age0z22")) #age effect?
 f.robftest(rlm_model, var="age0z21") #linear
 f.robftest(rlm_model, var="age0z22") #quadratic
 
+#effect sizes v2 - rik advice (only works for linear/quad alone) - zscore all vars & square coefficient
+f=rlm_model$coefficients[2]; f^2 #linear
+
+#effect sizes v1 - very wrong - should be doing F2R.m etc. But inapprorpaite for rlm
+f=f.robftest(rlm_model, var="age0z21"); f$statistic^2 #linear
+
+#effect sizes v3 - compute.es
+f=f.robftest(rlm_model, var=c("age0z21","age0z22")) #age effect?
+fes(f$statistic, 2, 583, level = 95, cer = 0.2, dig = 2, verbose = TRUE, id=NULL, data=NULL)
+
+
 #Plot
 p <- ggplot(df, aes(x = age, y = inScanner_RTmean))
 p <- p + geom_point(shape = 21, size = 3, colour = "black", fill = "white", stroke = 2)
@@ -56,8 +67,19 @@ bf01 = 1/bf10; bf01
 # onlyActivation  <- lmBF(inScanner_RTmean ~ univariateMean_R_0z, data=df); onlyActivation
 # onlyAge         <- lmBF(inScanner_RTmean ~ age0z2, data=df); onlyAge
 
+#------ Effect Sizes ------#
+#Repeat rlm after standardising all variables
+rlm_model <- rlm(scale(inScanner_RTmean) ~ scale(univariateMean_R_0z) * age0z2,
+                 data = df, psi = psi.huber, k = 1.345)
+summary(rlm_model)
+#Effect Sizes: Full Behavioural Model R2 from fes (squared i.e. r2) - Effect column #IF t stat, before fes, square the t stat that is equivalent to f value (if there's only 1 predictor))
+f = f.robftest(rlm_model)
+f2 = fes(f$statistic, 5, 580, level = 95, cer = 0.2, dig = 2, verbose = TRUE, id=NULL, data=NULL)
+R2 = (f2$r ^ 2) * 100 #R2 as percentage
+fprintf("FullModel (F) rlm R2 (as percentage) = %f\n",signif(R2,3))
 
-#Plot (not standardised for interpretability)
+
+#------ Plot (not standardised for interpretability) ------#
 rlm_model <- rlm(inScanner_RTmean ~ univariateMean_R * age,
                  data = df, psi = psi.huber, k = 1.345)
 summary(rlm_model)

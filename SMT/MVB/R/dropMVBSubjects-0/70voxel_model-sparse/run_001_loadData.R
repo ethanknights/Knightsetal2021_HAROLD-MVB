@@ -24,6 +24,8 @@ library(Rcpp)
 library(stringi)
 library(foreign)
 library(mdscore)
+library(compute.es)
+library(pracma)
 
 rm(list = ls()) # clears environment
 cat("\f") # clears console
@@ -63,10 +65,10 @@ df$outScanner_RTsd <- df$outScanner_RTsd * 1000
 vTert = quantile(df$age, c(0:3/3)) #rememebr this is useful for plot_model
 
 df$ageTert = with(df, 
-               cut(age, 
-                   vTert, 
-                   include.lowest = T, 
-                   labels = c("YA", "ML", "OA")))
+                  cut(age, 
+                      vTert, 
+                      include.lowest = T, 
+                      labels = c("YA", "ML", "OA")))
 
 #---- Run Analyses (manually) ----#
 # run_fMRI_univariate.R

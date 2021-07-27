@@ -56,9 +56,32 @@ bf01 = 1/bf10; bf01
 # onlyActivation  <- lmBF(outScanner_RTmean ~ univariateMean_R_0z, data=df); onlyActivation
 # onlyAge         <- lmBF(outScanner_RTmean ~ age0z2, data=df); onlyAge
 
+#------ Effect Sizes ------#
+#Repeat rlm after standardising all variables
+rlm_model <- rlm(scale(outScanner_RTsd) ~ scale(univariateMean_R_0z) * age0z2,
+                 data = df, psi = psi.huber, k = 1.345)
+summary(rlm_model)
+#Effect Sizes: report linear and quadratic (regression coefficient) from rml - Linear and quad column
+fprintf("Linear Age rlm beta = %f\n",signif(rlm_model$coefficients[3],3))
+fprintf("Quadratic Age rlm beta = %f\n",signif(rlm_model$coefficients[4],3))
+fprintf("Ipsilateral rlm beta = %f\n",signif(rlm_model$coefficients[2],3))
+#Effect Sizes: Full Behavioural Model R2 from fes (squared i.e. r2) - Effect column #IF t stat, before fes, square the t stat that is equivalent to f value (if there's only 1 predictor))
+f = f.robftest(rlm_model)
+f2 = fes(f$statistic, 5, 75, level = 95, cer = 0.2, dig = 2, verbose = TRUE, id=NULL, data=NULL)
+R2 = (f2$r ^ 2) * 100 #R2 as percentage
+fprintf("FullModel (F) rlm R2 (as percentage) = %f\n",signif(R2,3))
+#Effect Sizes: Age Effects: from fes (squared i.e. r2) - Effect column #IF t stat, before fes, square the t stat that is equivalent to f value (if there's only 1 predictor))
+f = f.robftest(rlm_model, var=c("age0z21","age0z22")) #age effect?
+f2 = fes(f$statistic, 2, 75, level = 95, cer = 0.2, dig = 2, verbose = TRUE, id=NULL, data=NULL)
+R2 = (f2$r ^ 2) * 100 #R2 as percentage
+fprintf("AgeEffect (F) rlm R2 (as percentage) = %f\n",signif(R2,3))
+#Effect Sizes: Age * Ipsilateral interaction: from fes (squared i.e. r2) - Effect column #IF t stat, before fes, square the t stat that is equivalent to f value (if there's only 1 predictor))
+f = f.robftest(rlm_model, var=c("scale(univariateMean_R_0z):age0z21","scale(univariateMean_R_0z):age0z22")) #age effect?
+f2 = fes(f$statistic, 2, 75, level = 95, cer = 0.2, dig = 2, verbose = TRUE, id=NULL, data=NULL)
+R2 = (f2$r ^ 2) * 100 #R2 as percentage
+fprintf("Age*Ipsilateral Interaction (F) rlm R2 (as percentage) = %f\n",signif(R2,3))
 
-
-#Plot (not standardised for interpretability)
+#------ Plot (not standardised for interpretability) ------#
 rlm_model <- rlm(outScanner_RTsd ~ univariateMean_R * age,
                  data = df, psi = psi.huber, k = 1.345)
 summary(rlm_model)

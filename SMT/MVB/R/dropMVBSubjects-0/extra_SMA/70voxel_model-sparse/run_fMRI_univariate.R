@@ -1,11 +1,20 @@
 #======================= Univariate Mean Activation ======================#
 #-------------- LH --------------#
-rlm_model <- rlm(univariateMean_L ~ age0z2, 
+rlm_model <- rlm(scale(univariateMean_L) ~ age0z2, 
                  data = df, psi = psi.huber, k = 1.345)
 summary(rlm_model)
 f.robftest(rlm_model, var=c("age0z21","age0z22")) #age effect?
 f.robftest(rlm_model, var="age0z21") #linear
 f.robftest(rlm_model, var="age0z22") #quadratic
+
+#Effect Sizes: report linear and quadratic (regression coefficient) from rml - Linear and quad column
+fprintf("Linear Age rlm beta = %f\n",signif(rlm_model$coefficients[2],3))
+fprintf("Quadratic Age rlm beta = %f\n",signif(rlm_model$coefficients[3],3))
+#Effect Sizes: report linear & quadratic r value from fes (squared i.e. r2) - Effect column #IF t stat, before fes, square the t stat that is equivalent to f value (if there's only 1 predictor))
+f = f.robftest(rlm_model, var=c("age0z21","age0z22")) #age effect?
+f2 = fes(f$statistic, 2, 583, level = 95, cer = 0.2, dig = 2, verbose = TRUE, id=NULL, data=NULL)
+R2 = (f2$r ^ 2) * 100
+fprintf("AgeEffect (F) rlm R2 (as percentage) = %f\n",signif(R2,3))
 
 p <- ggplot(df, aes(x = age, y = univariateMean_L)) +
   geom_point(shape = 21, size = 3, colour = "indianred2", fill = "lightpink", stroke = 2)
@@ -30,14 +39,22 @@ ggsave(file.path(outImageDir,'univariateMean_LH.png'),
        width = 25, height = 25, units = 'cm', dpi = 300); p
 
 
-
 #-------------- RH --------------#
-rlm_model <- rlm(univariateMean_R ~ age0z2, 
+rlm_model <- rlm(scale(univariateMean_R) ~ age0z2, 
                  data = df, psi = psi.huber, k = 1.345)
 summary(rlm_model)
 f.robftest(rlm_model, var=c("age0z21","age0z22")) #age effect? 
 f.robftest(rlm_model, var="age0z21") #linear
 f.robftest(rlm_model, var="age0z22") #quadratic
+
+#Effect Sizes: report linear and quadratic (regression coefficient) from rml - Linear and quad column
+fprintf("Linear Age rlm beta = %f\n",signif(rlm_model$coefficients[2],3))
+fprintf("Quadratic Age rlm beta = %f\n",signif(rlm_model$coefficients[3],3))
+#Effect Sizes: report linear & quadratic r value from fes (squared i.e. r2) - Effect column #IF t stat, before fes, square the t stat that is equivalent to f value (if there's only 1 predictor))
+f = f.robftest(rlm_model, var=c("age0z21","age0z22")) #age effect?
+f2 = fes(f$statistic, 2, 583, level = 95, cer = 0.2, dig = 2, verbose = TRUE, id=NULL, data=NULL)
+R2 = (f2$r ^ 2) * 100 #
+fprintf("AgeEffect (F) rlm R2 (as percentage) = %f\n",signif(R2,3))
 
 p <- ggplot(df, aes(x = age, y = univariateMean_R)) +
   geom_point(shape = 21, size = 3, colour = "indianred2", fill = "lightpink", stroke = 2)
