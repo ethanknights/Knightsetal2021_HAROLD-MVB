@@ -2,6 +2,10 @@
 #============================== MVPA ANALYSIS ============================#
 #=========================================================================#
 
+#This script is for testing decAcc > change & predicted by age (Fig 5A/5B) where we include all subs
+#(i.e. model comparison stats (Fig 5C) comes from ...
+#run_fMRI_excludeMVPAFailed.R, for consistency with MVB (we we subset failed Bilateral subs)):
+
 #---- Transform some stuff ----#
 #decAcc to percentage
 df$MVPA_L_4way = df$MVPA_L_4way*100
@@ -158,6 +162,7 @@ dev.off()
 
 
 #---------- decAcc Boost predicted by age? --------#
+#SEE run_fMRI_MVPA_excludeMVPAFailedSubs.R for the analysis more comparable with MVB model comparison
 df$MVPA_boost = df$MVPA_Bi_4way - df$MVPA_L_4way
 
 rlm_model <- rlm(MVPA_boost ~ age0z2, 

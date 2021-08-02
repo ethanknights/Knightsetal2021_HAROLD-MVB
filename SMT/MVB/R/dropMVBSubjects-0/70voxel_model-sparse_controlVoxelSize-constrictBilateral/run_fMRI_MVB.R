@@ -81,16 +81,9 @@ p <- pnorm(abs(ctable[, "t value"]), lower.tail = FALSE) * 2 ## calculate and st
 (ctable <- cbind(ctable, "p value" = p)) ## combined table
 
 # #get odds ratio
-# exp(coef(m))
-# ci<-confint(m)
-# exp(cbind(OR = coef(m), ci))
-# 
-# #Because the odd ratio above was not sensible, lets get this by repeating with just the sig predictor
-# m <- polr(ordy ~ age0z^2, data=df_subset, Hess=TRUE) #could we use this to get sensible odds ratio ... ??
-# exp(coef(m))
-# ci<-confint(m)
-# exp(cbind(OR = coef(m), ci))
-
+exp(coef(m))
+ci<-confint(m)
+exp(cbind(OR = coef(m), ci))
 
 #Plot - geom_density
 ggplot(df_subset, aes(age, fill = fct_rev(ordy))) +

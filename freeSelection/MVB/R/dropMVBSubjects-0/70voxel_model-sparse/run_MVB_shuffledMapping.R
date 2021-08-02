@@ -2,9 +2,12 @@
 source("R_rainclouds.R")
 
 extraData <- read.csv(file.path(rawDir,"extradata_ShuffledGroupFVals.csv"), header=TRUE,sep=",")
-t.test(extraData$Log, alternative = 'greater', mu = 3)
+t = t.test(extraData$Log, alternative = 'greater', mu = 3); t
 group = rep(1,nrow(extraData))
 extradf = cbind(extraData,group)
+
+t$statistic/ sqrt(nrow(df)) #cohenD
+#  ES.t.one( t = t$statistic, df = t$parameter, alternative = 'one.sided' )    #doublecheck cohenD
 
 ggplot(extradf,aes(x=group,y=Log, fill = "indianred2")) +
   geom_flat_violin(position = position_nudge(x = .2, y = 0),adjust =2,alpha=.5,size=1.5) +

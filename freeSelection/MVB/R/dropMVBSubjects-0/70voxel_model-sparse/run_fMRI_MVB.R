@@ -22,7 +22,10 @@ model <- glm(formula = ordy  ~ age0z2,
 summary(model)
 wald.test(model, terms = c(2,3)) #age effect?
 source("getBF_MVB_linearANDQuadratic.R")  #get BF01 for Boost ~ Age > 0
-
+#Get Odds ratio
+exp(coef(model))
+ci<-confint(model)
+OR <- exp(cbind(OR = coef(model), ci)); OR
 
 #Plot - geom_density 
 #fancier than: plot(df$age,df$ordy)
