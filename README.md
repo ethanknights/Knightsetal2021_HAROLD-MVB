@@ -34,30 +34,20 @@ if ~done_setupDirs; setupDirs; end
 
 <h1> 2. ROI definition  </h1>
 
-At the createROI.m stage of wrapper.m, stop and use SPM_results_ui to load the data/groupGLM/SPM.mat & leave cursor on peaks of the to-be-defined ROI before using:
+At the createROI.m stage of wrapper.m, stop and use `SPM_results_ui` to load the `data/groupGLM/SPM.mat` & leave cursor on peaks of the to-be-defined ROI before using:
 ```c
 createROI /*outputs: PreCG_R_70.nii,PreCG_L_70.nii etc.
 ```
 
 <h1> 3. Multivoxel Pattern Analysis (MVPA) & Multivariate Bayesian Decoding (MVB) </h1>
 
-```c
-cd freeSelection/pp 
-classify_run2 /*MVPA
-```
+The above `SMT/pp/wrapper.m` script is currently setup to conclude by extracting beta estimates for single trials (and MVPA in Experiment 2). </br> Otherwise MVB is run via the `SMT/MVB/` routine.
 
-```c
-cd SMT/MVB 
-camcan_main_mvb_top /*MVB
-```
-Note that the `SMT/pp/wrapper.m` script is currently setup to conclude by extracting beta estimates for single trials (and MVPA in Experiment 2).
-
-
-<h1> 4. R Brain-Behaviour Modelling </h1>
+<h1> 4. R: Brain-Behaviour Modelling </h1>
 
 The MVB sub-directories contains matlab code to create the data-tables for R analysis (`SMT/MVB/doPostProcessing.m`). Download these from osf.io/seuz5 (as this will fail to collect phenotypes like RT unless in the MRC CBU environment).
 
-Ensure that the `data.csv`'s are placed in the appropriate csv directory (e.g. for the main analysis place the data.csv in 'SMT/MVB/R/70voxel_model-sparse/csv/data.csv', or control analysis: 'SMT/MVB/R/70voxel_model-sparse_controlVoxelSize-constrictBilateral/csv/data.csv').
+Ensure the `data.csv`'s are placed in the appropriate csv directory (e.g. for the main analysis place the data.csv in `SMT/MVB/R/70voxel_model-sparse/csv/data.csv`, or control analysis: `SMT/MVB/R/70voxel_model-sparse_controlVoxelSize-constrictBilateral/csv/data.csv`).
 
 In R, load the appropriate `data.csv` with `SMT/MVB/R\<analysistype\>/\<analysistype\>/run_001_loadData.R`.
 </br> From there, any of the reported analyses can be run with the dataframe: `df`.
