@@ -1,0 +1,9 @@
+*.txt
+*.*~
+*.jpg
+.DS_Store
+*.Rhistory
+*.nii
+*.mat
+*.csv
+*job*.out

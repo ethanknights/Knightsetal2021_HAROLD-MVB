@@ -33,7 +33,7 @@ parfor s = 1:nSubs; CCID = CCIDList{s}; subDir = fullfile(outDir,CCID); mkdir(su
     fN_RSFA = dir(fullfile(subDir,RSFAStr)); fN_RSFA = fN_RSFA.name;
     
     %% Smooth the RSFA image (10mm like con_0001.nii)
-    kernelSize = 10;
+    kernelSize = 0;
     matlabbatch = [];
     matlabbatch{1}.spm.spatial.smooth.data = {fullfile(subDir,fN_RSFA)};
     matlabbatch{1}.spm.spatial.smooth.fwhm = [kernelSize,kernelSize,kernelSize]; %[8,8,8] etc.
@@ -54,7 +54,7 @@ parfor s = 1:nSubs; CCID = CCIDList{s}; subDir = fullfile(outDir,CCID); mkdir(su
       };
     matlabbatch{1}.spm.util.imcalc.output = fN_conRSFA;
     matlabbatch{1}.spm.util.imcalc.outdir = {subDir};
-    matlabbatch{1}.spm.util.imcalc.expression = 'i1 ./ i2';
+    matlabbatch{1}.spm.util.imcalc.expression = 'i1./(1+i2)';  %'i1 ./ i2';
     matlabbatch{1}.spm.util.imcalc.var = struct('name', {}, 'value', {});
     matlabbatch{1}.spm.util.imcalc.options.dmtx = 0;
     matlabbatch{1}.spm.util.imcalc.options.mask = 0;
