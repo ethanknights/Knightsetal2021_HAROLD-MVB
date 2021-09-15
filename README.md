@@ -62,14 +62,12 @@ Ensure that the `data.csv`'s are placed in the appropriate csv directory (e.g. f
 In R, load the appropriate `data.csv` with `SMT/MVB/R\<analysistype\>/\<analysistype\>/run_001_loadData.R`.
 </br> From there, any of the reported analyses can be run with the dataframe: `df`.
 
-For example, for the HAROLD effect:
+For example, the HAROLD effect:
 ```r
 setwd('HAROLD-MVB/tree/main/SMT/MVB/R')
 source('run_fMRI_univariate.R')
 #essentially comprising a point ggplot based on:
-rlm_model <- rlm(univariateMean_L ~ age0z2, 
+rlm_model <- rlm(univariateMean_R ~ age0z2, 
                  data = df, psi = psi.huber, k = 1.345)
 ```
-
-
-![Foo]()
+![Foo](https://raw.githubusercontent.com/ethanknights/HAROLD-MVB/main/SMT/MVB/R/dropMVBSubjects-0/70voxel_model-sparse/images/univariateMean_RH.png)
