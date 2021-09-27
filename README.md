@@ -14,12 +14,19 @@ Matlab & R Code is generally similar between Experiment 1 (SMT) and Experiment 2
   * bayesfactor
 * Datasets
     * For ROIs (definition/timeseries extraction) & multivariate procedures (MVB, MVPA):
-        * MVB Sensorimotor Task fMRI & T1-weighted image release004 datasets (from www.cam-can.org).
+        * MVB Sensorimotor Task fMRI & T1-weighted image release004 datasets (request from www.cam-can.org).
     * For R modelling:
         *    Download preprocessed data .csv's (osf.io/seuz5) 
 </br></br>
 <h1> 1. f/MRI Preprocessing </h1>
-Preprocessing was performed with automaticanalysis and SPM using code in SMT/pp. In matlab:
+Initial preprocessing was performed for the Stage 3 Cam-CAN FreeSelection dataset using automaticanalysis (github.com/automaticanalysis), to match the stage 2 fMRI pipeline branch. In matlab:
+
+```c
+cd freeSelection/aa_cc280_fingerTapping
+run_aa
+```
+  
+Then standard SPM models are generated using code in SMT/pp. In matlab:
 
 ```c
 cd SMT/pp
@@ -60,4 +67,4 @@ source('run_fMRI_univariate.R')
 rlm_model <- rlm(univariateMean_R ~ age0z2, 
                  data = df, psi = psi.huber, k = 1.345)
 ```
-![Foo](https://raw.githubusercontent.com/ethanknights/HAROLD-MVB/main/SMT/MVB/R/dropMVBSubjects-0/70voxel_model-sparse/images/univariateMean_RH.png)
+![HAROLD_image](https://raw.githubusercontent.com/ethanknights/HAROLD-MVB/main/SMT/MVB/R/dropMVBSubjects-0/70voxel_model-sparse/images/univariateMean_RH.png)
